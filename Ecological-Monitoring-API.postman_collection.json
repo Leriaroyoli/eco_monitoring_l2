@@ -1,0 +1,284 @@
+{
+	"info": {
+		"_postman_id": "ecological-monitoring-api-001",
+		"name": "Ecological Monitoring API",
+		"description": "REST API колекція для системи екологічного моніторингу. Містить всі CRUD операції для управління даними про якість повітря.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "ecological-monitoring"
+	},
+	"item": [
+		{
+			"name": "Base",
+			"item": [
+				{
+					"name": "Get API Info",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								""
+							]
+						},
+						"description": "Отримати інформацію про API та доступні endpoints"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Air Quality",
+			"item": [
+				{
+					"name": "Get All Records",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/air-quality",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"air-quality"
+							]
+						},
+						"description": "Отримати всі записи про якість повітря"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Records (with filters)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/air-quality?location=Київ&limit=10&skip=0",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"air-quality"
+							],
+							"query": [
+								{
+									"key": "location",
+									"value": "Київ",
+									"description": "Фільтр за локацією (опціонально)"
+								},
+								{
+									"key": "limit",
+									"value": "10",
+									"description": "Кількість записів (опціонально, за замовчуванням: 100)"
+								},
+								{
+									"key": "skip",
+									"value": "0",
+									"description": "Кількість записів для пропуску (опціонально)"
+								}
+							]
+						},
+						"description": "Отримати записи з фільтрацією за локацією та пагінацією"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Record by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/air-quality/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"air-quality",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "",
+									"description": "ID запису (замініть на реальний ID після створення запису)"
+								}
+							]
+						},
+						"description": "Отримати конкретне вимірювання за ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Create New Record",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"location\": \"Київ\",\n  \"pm25\": 25.5,\n  \"pm10\": 45.2,\n  \"no2\": 30.0,\n  \"o3\": 50.0,\n  \"co\": 1.2,\n  \"temperature\": 20.5,\n  \"humidity\": 65,\n  \"airQualityIndex\": 75\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/air-quality",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"air-quality"
+							]
+						},
+						"description": "Створити новий запис вимірювання якості повітря. Обов'язкові поля: location, pm25, pm10"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Record (Minimal)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"location\": \"Львів\",\n  \"pm25\": 18.3,\n  \"pm10\": 38.7\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/air-quality",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"air-quality"
+							]
+						},
+						"description": "Створити запис з мінімальними обов'язковими полями"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Record",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"location\": \"Київ\",\n  \"pm25\": 30.0,\n  \"pm10\": 50.0,\n  \"no2\": 35.0,\n  \"o3\": 55.0,\n  \"co\": 1.5,\n  \"temperature\": 22.0,\n  \"humidity\": 68,\n  \"airQualityIndex\": 80\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/air-quality/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"air-quality",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "",
+									"description": "ID запису для оновлення"
+								}
+							]
+						},
+						"description": "Повністю оновити існуюче вимірювання. Потрібно передати всі поля."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Record",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/air-quality/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"air-quality",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "",
+									"description": "ID запису для видалення"
+								}
+							]
+						},
+						"description": "Видалити запис вимірювання за ID"
+					},
+					"response": []
+				}
+			],
+			"description": "Endpoints для управління даними про якість повітря"
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:3000",
+			"type": "string"
+		}
+	]
+}
+
